@@ -3,7 +3,7 @@ function findSecondLargest(arr) {
         second = 0;
 
     // Corner Cases
-    if (arr.length === 0 || arr.length === 1) return `Array should have minimum 2 items to find second largest.`
+    if (arr.length < 2) return `Array should have minimum 2 items to find second largest.`
 
     // Start with two values - first largest and second largest
     if (arr[0] > arr[1]) {

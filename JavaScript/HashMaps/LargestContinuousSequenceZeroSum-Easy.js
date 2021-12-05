@@ -29,7 +29,7 @@ var largestContinuousSequenceZeroSum = (A) => {
         }
     }
 
-    // If there is no such subarray, then check if there is any '0' in the array, which can be a subarray itself.
+    // If there is no such subarray which sum is equal to 0, then check if there is any '0' in the array, which can be a subarray itself.
     // If '0' exists then '0' is the answer.
     if (start === 0 && end === 0) {
         for (let i = 0; i < A.length; i++) {
@@ -50,5 +50,55 @@ var largestContinuousSequenceZeroSum = (A) => {
 
     return res;
 }
+
+
+//// Solution 2 - Using Prefix sum and Hashing - TC: O(n) - SC: O(n)
+var largestContinuousSequenceZeroSum = (A) => {
+    let res = [],
+        start = 0,
+        end = 0,
+        max = Number.MIN_SAFE_INTEGER,
+        lookup = {},
+        cumulative = 0;;
+
+    // Iterate over input array and calculate cumulative sum(prefix sum)
+    for (let i = 0; i < A.length; i++) {
+        cumulative += A[i];
+
+        // If at any point, the cumulative sum is 0 then we can say that we have seen a subarray with sum 0
+        // So, update start and end pointers and max as well
+        if (cumulative === 0) {
+            start = -1;
+            end = i;
+            max = i + 1;
+        } else {
+            //// Else, check if any key in the hashmap already exists
+            if (lookup[cumulative] >= 0) {
+                // if that already exists then we can take diff of the index stored for that key and the current index in the loop
+                let currentIndex = lookup[cumulative];
+                let diff = i - currentIndex;
+
+                // if that diff is greater than the current max, then we can say it is the largest sequence so far, and update start, end and max accordingly
+                if (diff > max) {
+                    start = currentIndex;
+                    end = i;
+                    max = diff;
+                }
+            } else {
+                // else store the index at that key
+                lookup[cumulative] = i;
+            }
+        }
+    }
+
+    // After the above loop, we will have the start and end pointers with the max distance
+    // So, iterate with them on input array and append each element to result
+    for (let i = start + 1; i <= end; i++) {
+        res.push(A[i]);
+    }
+    return res;
+}
+
+
 
 console.log(largestContinuousSequenceZeroSum());

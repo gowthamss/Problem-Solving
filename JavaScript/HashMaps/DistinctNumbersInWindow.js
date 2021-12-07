@@ -35,8 +35,9 @@ var dNums = (A, B) => {
     // 1
     for (let i = 0; i < B; i++) {
         let val = A[i];
-        if (lookup.get(val)) {
-            lookup.set(val, lookup.get(val) + 1);
+        let freq = lookup.get(val);
+        if (freq) {
+            lookup.set(val, freq + 1);
         } else {
             lookup.set(val, 1);
         }
@@ -48,10 +49,11 @@ var dNums = (A, B) => {
     // 3
     for (let j = B; j < A.length; j++) {
         let val = A[j];
+        let freq = lookup.get(val);
 
         // 4
-        if (lookup.get(val)) {
-            lookup.set(val, lookup.get(val) + 1);
+        if (freq) {
+            lookup.set(val, freq + 1);
         } else {
             lookup.set(val, 1);
         }

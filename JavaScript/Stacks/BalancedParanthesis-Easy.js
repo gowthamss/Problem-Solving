@@ -10,7 +10,7 @@
 
 // Note: This is data structure question. And this can be solved using stacks.
 
-var balancedParantheses = (A) => {
+var balancedParanthesis = (A) => {
     // We know that a single character can't be a valid parantheses, so return 0
     if (A.length < 2) {
         return 0;
@@ -42,7 +42,7 @@ var balancedParantheses = (A) => {
 }
 
 
-console.log(balancedParantheses(")))"));
-console.log(balancedParantheses("))((()(())"));
-console.log(balancedParantheses("(()())"));
-console.log(balancedParantheses("(()"));
+console.log(balancedParanthesis(")))"));
+console.log(balancedParanthesis("))((()(())"));
+console.log(balancedParanthesis("(()())"));
+console.log(balancedParanthesis("(()"));

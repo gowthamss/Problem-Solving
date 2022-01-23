@@ -27,6 +27,8 @@
 // 6. After every step compare 'bad_nos' and min we have seen so far and update if it is minimum
 // 7. Return min.
 
+// **Note: You can run this code in any browser console.
+
 var minimumSwaps = (A, B) => {
     let numbersLessthanB = 0,
         bad_nos = 0,

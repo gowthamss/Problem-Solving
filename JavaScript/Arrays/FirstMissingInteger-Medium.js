@@ -88,6 +88,36 @@ var firstMissingIntegerUsingLogic = (A) => {
     return len + 1;
 }
 
+//// Optimized 3 - Using swapping of elements
+var firstMissingIntegerUsingLogic2 = (A) => {
+    let i = 0,
+        len = A.length;
+
+    while (i < len) {
+        if (A[i] <= 0) {
+            i++;
+        } else {
+            let temp = A[A[i] - 1];
+            if (temp === A[i])
+                i++;
+            else {
+                A[A[i] - 1] = A[i];
+                A[i] = temp;
+            }
+        }
+    }
+
+    for (let i = 0; i < len; i++) {
+        if (A[i] <= 0 || A[i] !== i + 1) {
+            return i + 1;
+        }
+    }
+    return len + 1;
+}
+
 console.log(firstMissingIntegerBruteForce([3, 4, -1, 1]));
 console.log(firstMissingIntegerUsingSet([3, 4, -1, 1]));
 console.log(firstMissingIntegerUsingLogic([3, 4, -1, 1]));
+console.log(firstMissingIntegerUsingLogic2([3, 4, -1, 1]));
+console.log(firstMissingIntegerUsingLogic2([2, 2, 1, 2]));
+console.log(firstMissingIntegerUsingLogic2([2, 3, 1, 2]));

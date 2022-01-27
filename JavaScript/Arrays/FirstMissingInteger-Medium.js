@@ -97,12 +97,17 @@ var firstMissingIntegerUsingLogic2 = (A) => {
         if (A[i] <= 0) {
             i++;
         } else {
-            let temp = A[A[i] - 1];
-            if (temp === A[i])
+            if (A[i] === i + 1) {
                 i++;
-            else {
-                A[A[i] - 1] = A[i];
-                A[i] = temp;
+            } else {
+                let temp = A[A[i] - 1];
+                if (temp === A[i])
+                    i++;
+                else {
+                    A[A[i] - 1] = A[i];
+                    A[i] = temp;
+                }
+
             }
         }
     }

@@ -33,14 +33,16 @@
 //     01 - 1
 // So, return [0, 1].
 
-//// Solution - 
+//// Solution - Using Recursion - TC: O(2^N), SC: O(N)
 
 var grayCode = (A) => {
     if (A === 1) return [0, 1];
 
     let subAns = grayCode(A - 1);
-    let ans = [];
     let size = subAns.length;
+
+    // At each call, traverse from back of the array and add each array element with a number equal to (1<<(A-1))
+    // Ex: [0,1] -> [0,1,1+2, 0+2] -> [0,1,3,2]
     for (let i = size - 1; i >= 0; i--) {
         let elem = subAns[i] + (1 << (A - 1));
         subAns.push(elem);

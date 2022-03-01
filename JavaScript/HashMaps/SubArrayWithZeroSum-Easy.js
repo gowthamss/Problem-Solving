@@ -37,23 +37,20 @@ var subArrayWithZeroSum = (A) => {
         prefixArr[i] = A[i] + prefixArr[i - 1];
     }
 
-    // If any element in the prefix sum array is 0, then we found that we have a subarray with sum 0 so return 1.
-    for (let i = 0; i < prefixArr.length; i++) {
-        if (prefixArr[i] === 0) {
-            return 1;
-        }
-    }
 
     // Else, store them in hashmap/object with frequncies of prefix sum array.
     let lookup = {};
     for (let val of prefixArr) {
+        // If any element in the prefix sum array is 0, then we found that we have a subarray with sum 0 so return 1.    
+        if (val === 0) return 1;
+
         // If any element repeats, that means the sum of the elememts in that range in the original array is equal to 0.
         // Return 1.
         if (lookup[val]) {
             return 1;
         } else {
             // Else store that with 1.
-            lookup[val] = 1;
+            lookup[val] = true;
         }
     }
     return 0;

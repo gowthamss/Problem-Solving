@@ -44,14 +44,14 @@ var shaggyAndDistances = (A) => {
         if (lookup[A[i]] >= 0) {
             let currIndex = lookup[A[i]];
             // then take the diff of current index and the stored index value of that element.            
-            let diff = Math.abs(i - currIndex);
+            let diff = i - currIndex;
 
             // check if the computed diff with minDist so far.
             // if it is less than minDist then update this diff as new minDist and also update the index of that element in hashmap for any duplicate of same element in the array.
             if (diff < minDist) {
                 minDist = diff;
-                lookup[A[i]] = i;
             }
+            lookup[A[i]] = i;
         } else {
             // else store the index in hashmap. (Initial case when nothing is stored in hashmap)
             lookup[A[i]] = i;

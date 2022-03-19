@@ -11,7 +11,7 @@
 
 // Note: This is a data structure centric problem and can be solved using stacks.
 
-var balancedParathesis2 = (A) => {
+var balancedParanthesis2 = (A) => {
     // Create an object with all the given symbols for easy comparision
     let parans = {
         '{': '}',
@@ -42,6 +42,32 @@ var balancedParathesis2 = (A) => {
     return stack.length > 0 ? 0 : 1;
 }
 
-console.log(balancedParathesis2("{[()]}"));
-console.log(balancedParathesis2("(){"));
-console.log(balancedParathesis2("()[]"));
+var balancedParanthesis2IfElse = (A) => {
+    let stack = [];
+    for (let char of A) {
+        if (char === '(' || char === '{' || char === '[') {
+            stack.push(char);
+        } else {
+            if (!stack.length) return 0;
+
+            const popped = stack.pop();
+
+            if (char === ')') {
+                if (popped !== '(') return 0;
+            } else if (char === '}') {
+                if (popped !== '{') return 0;
+            } else {
+                if (popped !== '[') return 0;
+            }
+        }
+    }
+    return stack.length ? 0 : 1;
+}
+
+console.log(balancedParanthesis2("{[()]}"));
+console.log(balancedParanthesis2("(){"));
+console.log(balancedParanthesis2("()[]"));
+
+console.log(balancedParanthesis2IfElse("{[()]}"));
+console.log(balancedParanthesis2IfElse("(){"));
+console.log(balancedParanthesis2IfElse("()[]"));
